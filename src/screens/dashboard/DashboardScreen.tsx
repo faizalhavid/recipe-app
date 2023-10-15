@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { AppColors } from '../../commons/colors';
-import { Searchbar } from 'react-native-paper';
+import { Chip, Searchbar } from 'react-native-paper';
 import * as React from 'react';
 import { SetStateAction } from 'react';
 import { AppTextStyle } from '../../commons/textStyle';
@@ -25,7 +25,36 @@ export function DashboardScreen() {
         <AppButton spacing={5} title="See all" textStyle={{ color: AppColors.Primary_30, fontFamily: 'Popins-SemiBold', fontSize: 14 }} onPress={() => navigate('Dashboard')} backgroundcolor={'transparent'} height={5} width={20} suffix={<Ionicons name="ios-arrow-forward" size={23} color={AppColors.Primary_30} style={{ fontWeight: '400' }} />} />
       </AppStack>
       <Spacer top={20} />
-      <AppCard />
+      <View style={{ height: 300 }}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <AppCard likes="4.5" title="How to make sushi at home" author="Niki Samentha" authorImage="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=377&q=80" />
+          <AppCard likes="4.5" title="How to make sushi at home" author="Niki Samentha" authorImage="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=377&q=80" />
+          <AppCard likes="4.5" title="How to make sushi at home" author="Niki Samentha" authorImage="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=377&q=80" />
+        </ScrollView>
+      </View>
+      <Text style={AppTextStyle.h4(AppColors.Neutral_100, 18)}>Popular category</Text>
+      <View style={{ height: 50 }}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <Chip onPress={() => console.log('Pressed')} style={styles.chip} textStyle={{ color: AppColors.Primary_50 }}>
+            Breakfast
+          </Chip>
+          <Chip onPress={() => console.log('Pressed')} style={styles.chip} textStyle={{ color: AppColors.Primary_50 }}>
+            Salad
+          </Chip>
+          <Chip onPress={() => console.log('Pressed')} style={styles.chip} textStyle={{ color: AppColors.Primary_50 }}>
+            Appetizer
+          </Chip>
+          <Chip onPress={() => console.log('Pressed')} style={styles.chip} textStyle={{ color: AppColors.Primary_50 }}>
+            Dinner
+          </Chip>
+          <Chip onPress={() => console.log('Pressed')} style={styles.chip} textStyle={{ color: AppColors.Primary_50 }}>
+            Cake
+          </Chip>
+          <Chip onPress={() => console.log('Pressed')} style={styles.chip} textStyle={{ color: AppColors.Primary_50 }}>
+            Soup
+          </Chip>
+        </ScrollView>
+      </View>
     </AppSafeAreaView>
   );
 }
@@ -41,4 +70,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 15,
   },
+  chip: { height: 32, backgroundColor: AppColors.Neutral_0, marginRight: 5 },
 });
