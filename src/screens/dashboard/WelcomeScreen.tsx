@@ -31,7 +31,7 @@ function WelcomeScreen() {
             <Text style={AppTextStyle.h4(AppColors.Neutral_0, 39)}>Cooking</Text>
             <Text style={AppTextStyle.p(AppColors.Neutral_0)}>Find best recipes for cooking</Text>
             <Spacer top={20} />
-            <AppButton spacing={10} title="Get Started" textStyle={{ color: AppColors.Neutral_0, fontFamily: 'Popins-Medium', fontSize: 16 }} onPress={() => navigate('Dashboard')} backgroundcolor={AppColors.Primary_50} height={15} width={40} suffix={<Ionicons name="ios-arrow-forward" size={20} color={AppColors.Neutral_0} style={{ fontWeight: '100' }} />} />
+            <AppButton spacing={10} title="Get Started" textStyle={{ color: AppColors.Neutral_0, fontFamily: 'Popins-Medium', fontSize: 16 }} onPress={() => navigate('BottomTabNavigator')} backgroundcolor={AppColors.Primary_50} height={15} width={40} suffix={<Ionicons name="ios-arrow-forward" size={20} color={AppColors.Neutral_0} style={{ fontWeight: '100' }} />} />
           </AppStack>
         </LinearGradient>
       </ImageBackground>

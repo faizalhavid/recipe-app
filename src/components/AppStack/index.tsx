@@ -15,9 +15,10 @@ type AppStackProps = {
   paddingHorizontal?: number;
   paddingVertical?: number;
   spacing?: number;
+  style?: any;
 };
 
-export function AppStack({ children, direction, alignItems, justifyContent, alignContent, paddingHorizontal, paddingVertical, spacing }: AppStackProps) {
+export function AppStack({ children, direction, alignItems, justifyContent, alignContent, paddingHorizontal, paddingVertical, spacing, style }: AppStackProps) {
   const addSpacing = (child: React.ReactNode, index: number) => {
     if (index === children?.length - 1) {
       return child;
@@ -39,5 +40,5 @@ export function AppStack({ children, direction, alignItems, justifyContent, alig
       );
     }
   };
-  return <View style={{ flexDirection: direction, alignItems: alignItems, justifyContent: justifyContent, alignContent: alignContent, paddingHorizontal: paddingHorizontal, paddingVertical: paddingVertical }}>{React.Children.map(children, (child, index) => addSpacing(child, index))}</View>;
+  return <View style={{ flexDirection: direction, alignItems: alignItems, justifyContent: justifyContent, alignContent: alignContent, paddingHorizontal: paddingHorizontal, paddingVertical: paddingVertical, ...style }}>{React.Children.map(children, (child, index) => addSpacing(child, index))}</View>;
 }

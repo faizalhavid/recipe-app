@@ -3,12 +3,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import WelcomeScreen from '../screens/dashboard/WelcomeScreen';
-import { DashboardScreen } from '../screens/dashboard/DashboardScreen';
 import { navigationRef } from './rootNavigator';
-import HeaderOptions from '../components/AppHeaderOptions';
-import { AppTextStyle } from '../commons/textStyle';
-import { AppColors } from '../commons/colors';
-import { Text, View } from 'native-base';
+import BottomTabNavigator from './bottomTabNavigator';
+import { DetailFoodRecipe } from '../screens/dashboard/DetailFoodRecipe';
 
 const RootStackNavigation = (): JSX.Element => {
   const RootStack = createNativeStackNavigator();
@@ -16,7 +13,9 @@ const RootStackNavigation = (): JSX.Element => {
     <NavigationContainer ref={navigationRef}>
       <RootStack.Navigator initialRouteName="Welcome">
         <RootStack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
-        <RootStack.Screen
+        <RootStack.Screen name="BottomTabNavigator" component={BottomTabNavigator} options={{ headerShown: false }} />
+        <RootStack.Screen name="DetailFoodRecipe" component={DetailFoodRecipe} options={{ headerShown: false }} />
+        {/* <RootStack.Screen
           name="Dashboard"
           component={DashboardScreen}
           options={{
@@ -36,7 +35,7 @@ const RootStackNavigation = (): JSX.Element => {
               shadowOpacity: 0,
             },
           }}
-        />
+        /> */}
         <RootStack.Screen name="NotFound" component={NotFoundScreen} />
       </RootStack.Navigator>
     </NavigationContainer>
