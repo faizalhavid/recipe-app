@@ -4,7 +4,6 @@ import { Avatar, Chip, Searchbar } from 'react-native-paper';
 import * as React from 'react';
 import { SetStateAction } from 'react';
 import { AppTextStyle } from '../../commons/textStyle';
-import AppSafeAreaView from '../../components/AppSafeAreaView';
 import { AppStack } from '../../components/AppStack';
 import { navigate } from '../../navigations/rootNavigator';
 import Ionicons from '@expo/vector-icons/Ionicons';

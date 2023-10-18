@@ -9,6 +9,9 @@ import { AppTextStyle } from '../commons/textStyle';
 import { BookmarkScreen } from '../screens/bookmark';
 import { AppStack } from '../components/AppStack';
 import { IconButton } from 'react-native-paper';
+import { Profile } from '../screens/profile';
+import { Notifications } from '../screens/notification';
+import { FontAwesome5 } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
@@ -17,6 +20,7 @@ function BottomTabNavigator() {
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: styles.tabBar,
+        tabBarActiveTintColor: AppColors.Primary_50,
       }}
     >
       <Tab.Screen
@@ -25,7 +29,6 @@ function BottomTabNavigator() {
         options={{
           tabBarIcon: ({ color, size }) => <AntDesign name="home" color={color} size={size} />,
 
-          tabBarActiveTintColor: AppColors.Primary_50,
           header: () => (
             <View style={{ paddingLeft: 20, paddingVertical: 15, height: 95, backgroundColor: AppColors.Neutral_0 }}>
               <Text style={AppTextStyle.h4(AppColors.Neutral_100, 20)}>Find best recipes</Text>
@@ -43,8 +46,6 @@ function BottomTabNavigator() {
         options={{
           tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="bookmark-minus-outline" size={size} color={color} />,
 
-          tabBarActiveTintColor: AppColors.Primary_50,
-
           header: () => (
             <AppStack direction="row" style={{ paddingHorizontal: 20, paddingVertical: 15, height: 65, backgroundColor: AppColors.Neutral_0 }} justifyContent="space-between" alignItems="center">
               <Text style={AppTextStyle.h4(AppColors.Neutral_100, 20)}>Saved recipes</Text>
@@ -58,6 +59,36 @@ function BottomTabNavigator() {
 
           headerShadowVisible: false,
           headerTitleStyle: AppTextStyle.h4(AppColors.Neutral_100, 20),
+        }}
+      />
+      <Tab.Screen
+        name="notification"
+        component={Notifications}
+        options={{
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="bell-outline" size={size} color={color} />,
+          header: () => (
+            <AppStack direction="row" style={{ paddingHorizontal: 20, paddingVertical: 15, height: 65, backgroundColor: AppColors.Neutral_0 }} justifyContent="space-between" alignItems="center">
+              <Text style={AppTextStyle.h4(AppColors.Neutral_100, 20)}>Notification</Text>
+              <AppStack direction="row">
+                <IconButton icon="tune-vertical" iconColor={AppColors.Neutral_100} size={25} onPress={() => console.log('Pressed')} />
+              </AppStack>
+            </AppStack>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="profile"
+        component={Profile}
+        options={{
+          tabBarIcon: ({ color, size }) => <FontAwesome5 name="user" size={20} color={color} />,
+          header: () => (
+            <AppStack direction="row" style={{ paddingHorizontal: 20, paddingVertical: 15, height: 65, backgroundColor: AppColors.Neutral_0 }} justifyContent="space-between" alignItems="center">
+              <Text style={AppTextStyle.h4(AppColors.Neutral_100, 20)}>My Profile</Text>
+              <AppStack direction="row">
+                <IconButton icon="dots-horizontal" iconColor={AppColors.Neutral_100} size={25} onPress={() => console.log('Pressed')} />
+              </AppStack>
+            </AppStack>
+          ),
         }}
       />
     </Tab.Navigator>

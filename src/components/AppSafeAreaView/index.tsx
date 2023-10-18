@@ -24,7 +24,7 @@ function AppSafeAreaView({ bg, mt = 0, statusBarColor, children, loading }: AppS
         flexDirection: 'column',
         backgroundColor: bg || useColorModeValue('white', 'black'),
         paddingVertical: 20,
-        paddingHorizontal: 20,
+        paddingHorizontal: 25,
       }}
     >
       {/* <AppStatusBar color={statusBarColor || useColorModeValue('white', 'black')} /> */}
