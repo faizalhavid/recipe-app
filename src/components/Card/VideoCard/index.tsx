@@ -7,12 +7,14 @@ import { Text } from 'native-base';
 import { AppStack } from '../../AppStack';
 import { IconButton } from 'react-native-paper';
 import { AppTextStyle } from '../../../commons/textStyle';
+import { Toast } from '../../Toast';
 
 type AppCardProps = {
   color?: string | undefined;
   barStyle?: 'light-content' | 'dark-content' | undefined;
   likes?: string;
   title?: string;
+  image?: string;
   author?: string;
   authorImage?: string;
   width?: number;
@@ -25,7 +27,7 @@ export function VideoCard({ color, barStyle, ...props }: AppCardProps) {
     <Card style={[styles.card, props.style, { width: props.width }]} theme={{ colors: { primary: 'white' } }}>
       <View style={[styles.container, { width: props.width }]}>
         <TouchableOpacity onPress={props.onPress} style={[styles.card, props.style]}>
-          <Image source={{ uri: 'https://plus.unsplash.com/premium_photo-1665394004212-0d014eb6da68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1778&q=80' }} style={[styles.background, { width: props.width }]} resizeMode="cover" />
+          <Image source={props.image ? { uri: props.image } : require('../../../../assets/images/unknown-image.png')} style={[styles.background, { width: props.width }]} resizeMode="cover" />
           <AppStack direction="row" justifyContent="space-between" paddingHorizontal={10} paddingVertical={10}>
             <Chip icon={() => <Ionicons name="star" size={12} color={AppColors.Neutral_0} />} onPress={() => console.log('Pressed')} style={styles.chip}>
               <Text style={AppTextStyle.h5(AppColors.Neutral_0, 12)}>{props.likes}</Text>
@@ -35,7 +37,7 @@ export function VideoCard({ color, barStyle, ...props }: AppCardProps) {
             </View>
           </AppStack>
           <AppStack direction="column" justifyContent="center" alignContent="center" alignItems="center" paddingHorizontal={10} paddingVertical={10}>
-            <IconButton icon="play" iconColor={AppColors.Neutral_0} mode="contained" onPress={() => console.log('Pressed')} style={styles.buttonPlayer} />
+            <IconButton icon="play" iconColor={AppColors.Neutral_0} mode="contained" onPress={() => Toast('Unavailable Video !')} style={styles.buttonPlayer} />
           </AppStack>
         </TouchableOpacity>
       </View>

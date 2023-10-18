@@ -8,18 +8,13 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Avatar, Button, List } from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
 
-type DetailFoodeRecipeProps = {
-  imageFood?: string;
-  title?: string;
-  author?: string;
-  authorImage?: string;
-  Ingredients?: object[];
-  steps?: object[];
+type DetailFoodRecipeProps = {
+  route: any;
 };
 
-export function DetailFoodRecipe({ title, imageFood, author, authorImage, Ingredients, steps }: DetailFoodeRecipeProps) {
-  title = 'How to make sushi at home';
-  Ingredients = [
+export function DetailFoodRecipe({ route }: DetailFoodRecipeProps) {
+  const { food, author } = route.params;
+  const Ingredients = [
     {
       material: 'bread',
       quantity: '200',
@@ -37,7 +32,7 @@ export function DetailFoodRecipe({ title, imageFood, author, authorImage, Ingred
       quantity: '200',
     },
   ];
-  steps = [
+  const steps = [
     {
       step: 'lorems',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus.',
@@ -79,33 +74,31 @@ export function DetailFoodRecipe({ title, imageFood, author, authorImage, Ingred
   };
   return (
     <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20, paddingVertical: 15 }} style={{ backgroundColor: AppColors.Neutral_0 }}>
-      <Text style={AppTextStyle.h4(AppColors.Neutral_90, 20)}>{title}</Text>
+      <Text style={AppTextStyle.h4(AppColors.Neutral_90, 20)}>{food.title}</Text>
       <Spacer top={10} />
-      <Image source={imageFood ? { uri: imageFood } : require('../../../assets/images/unknown-image.png')} style={{ height: 200, maxWidth: 370, borderRadius: 20 }} resizeMode="cover" />
-      <AppStack direction="row" justifyContent="space-between" alignItems="center" alignContent="center" style={{ marginTop: 20, width: 165 }}>
+      <Image source={food.image ? { uri: food.image } : require('../../../assets/images/unknown-image.png')} style={{ height: 200, width: 370, borderRadius: 20 }} resizeMode="cover" />
+
+      <AppStack direction="row" spacing={5} alignItems="center" alignContent="center" style={{ marginTop: 20, width: 150 }}>
         <Ionicons name="star" size={14} color={AppColors.Rating_100} style={{}} />
-        <Text style={AppTextStyle.h4(AppColors.Neutral_100, 14)}>4,5</Text>
-        <Text style={AppTextStyle.p(AppColors.Neutral_60, 14)}>{'(300 Reviews)'}</Text>
+        <Text style={AppTextStyle.h4(AppColors.Neutral_100, 14)}>{food.likes}</Text>
+        <Text style={AppTextStyle.p(AppColors.Neutral_60, 14)}>
+          {' '}
+          {'('}
+          {food.reviews}
+          {' reviews )'}
+        </Text>
       </AppStack>
 
       <List.Item
-        title={author || 'Niki Samentha'}
+        title={author.name || 'Niki Samentha'}
         description={() => (
-          <AppStack direction="row" alignItems="center" alignContent="center" justifyContent="space-between" style={{ width: 120 }}>
+          <AppStack direction="row" alignItems="center" alignContent="center" justifyContent="space-between" style={{ width: 160 }}>
             <Ionicons name="location" size={15} color={AppColors.Primary_40} style={{}} />
-            <Text style={AppTextStyle.p(AppColors.Neutral_60, 12)}>Bali , Indonesia</Text>
+            <Text style={AppTextStyle.p(AppColors.Neutral_60, 12)}>{author.address}</Text>
           </AppStack>
         )}
         style={{ width: 400 }}
-        left={() => (
-          <Avatar.Image
-            size={35}
-            source={{
-              uri: authorImage || 'https://cdn-icons-png.flaticon.com/512/64/64572.png',
-            }}
-            theme={{ colors: { primary: 'white' } }}
-          />
-        )}
+        left={() => <Avatar.Image size={35} source={require('../../../assets/images/author.jpg')} theme={{ colors: { primary: 'white' } }} style={{ marginTop: 10 }} />}
         right={() => (
           <Button mode="contained" theme={{ colors: { primary: AppColors.Primary_50 } }} style={{ borderRadius: 20, height: 45, width: 100 }}>
             Follow

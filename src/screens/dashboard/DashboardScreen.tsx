@@ -12,9 +12,21 @@ import Spacer from '../../components/Spacer';
 import { VideoCard } from '../../components/Card/VideoCard';
 import { FoodCard } from '../../components/Card/FoodCard';
 import { AxiosClient } from '../../services/axios-client';
+import { createShimmerPlaceHolder } from 'expo-shimmer-placeholder';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Toast } from '../../components/Toast';
 
 export function DashboardScreen() {
   const [searchQuery, setSearchQuery] = React.useState('');
+  const [chickenFood, setChickenFood] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const author = {
+    name: 'Moh. Faizal Norhavid',
+    email: 'nurhavid123@gmail.com',
+    address: 'Surabaya, Indonesia',
+    phone: '081234567890',
+  };
+
   const Creator = (imageUri?: string, name?: string) => {
     return (
       <AppStack direction="column" style={{ width: 60, marginRight: 15 }} spacing={10}>
@@ -31,15 +43,27 @@ export function DashboardScreen() {
       </AppStack>
     );
   };
-
-  const fetchFoodCard = async () => {
-    const response = await AxiosClient.get('/recipes/complexSearch?query=chicken&number=10');
-    console.log(response);
-  };
+  const ShimmerPlaceHolder = createShimmerPlaceHolder(LinearGradient);
 
   useEffect(() => {
-    fetchFoodCard();
-  }, []);
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await AxiosClient.get('complexSearch?query=chicken&number=6');
+        const data = response.data.results.map((item: object) => ({
+          ...item,
+          likes: (Math.random() * 5).toFixed(1),
+          reviews: (Math.random() * 100).toFixed(0),
+        }));
+        setChickenFood(data);
+        setLoading(false);
+      } catch (error) {
+        Toast('Error fetching data , try again later !');
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, [setChickenFood]);
 
   const onChangeSearch = (query: SetStateAction<string>) => setSearchQuery(query);
   return (
@@ -47,15 +71,41 @@ export function DashboardScreen() {
       <Searchbar placeholder="Search recipes" onChangeText={onChangeSearch} value={searchQuery} icon="magnify" style={styles.searchbar} inputStyle={AppTextStyle.p(AppColors.Neutral_30)} />
       <Spacer top={20} />
       <AppStack direction="row" justifyContent="space-between">
-        <Text style={AppTextStyle.h4(AppColors.Neutral_100, 18)}>Trending now 🔥</Text>
+        <Text style={AppTextStyle.h4(AppColors.Neutral_100, 18)}>Chicken Trending 🔥</Text>
         <AppButton spacing={5} title="See all" textStyle={{ color: AppColors.Primary_30, fontFamily: 'Popins-SemiBold', fontSize: 14 }} onPress={() => navigate('Dashboard')} backgroundcolor={'transparent'} height={5} width={20} suffix={<Ionicons name="ios-arrow-forward" size={23} color={AppColors.Primary_30} style={{ fontWeight: '400' }} />} />
       </AppStack>
       <Spacer top={20} />
       <View style={{ height: 280 }}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <VideoCard likes="4.5" onPress={() => navigate('DetailFoodRecipe')} style={{ marginRight: 10 }} title="How to make sushi at home" author="Niki Samentha" authorImage="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=377&q=80" width={290} />
-          <VideoCard likes="4.5" style={{ marginRight: 10 }} title="How to make sushi at home" author="Niki Samentha" authorImage="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=377&q=80" width={290} />
-          <VideoCard likes="4.5" style={{ marginRight: 10 }} title="How to make sushi at home" author="Niki Samentha" authorImage="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=377&q=80" width={290} />
+          {loading
+            ? [...Array(3)].map((_, index) => (
+                <AppStack key={index} direction="column" spacing={12} style={{ marginRight: 15 }}>
+                  <ShimmerPlaceHolder style={{ width: 260, height: 180, borderRadius: 15 }} />
+                  <ShimmerPlaceHolder style={{ width: 80, height: 10, borderRadius: 25 }} />
+                  <AppStack direction="row" spacing={15} alignItems="center" alignContent="center">
+                    <ShimmerPlaceHolder style={{ width: 40, height: 40, borderRadius: 50 }} />
+                    <ShimmerPlaceHolder style={{ width: 80, height: 10, borderRadius: 15 }} />
+                  </AppStack>
+                </AppStack>
+              ))
+            : chickenFood.map((item, index) => (
+                <VideoCard
+                  key={index}
+                  author={author.name}
+                  authorImage={author.image}
+                  title={item.title}
+                  likes={item.likes}
+                  image={item.image}
+                  style={{ marginRight: 10 }}
+                  width={290}
+                  onPress={() =>
+                    navigate('DetailFoodRecipe', {
+                      food: item,
+                      author: author,
+                    })
+                  }
+                />
+              ))}
         </ScrollView>
       </View>
       <Text style={AppTextStyle.h4(AppColors.Neutral_100, 18)}>Popular category</Text>
