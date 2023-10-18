@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { AppColors } from '../../commons/colors';
 import { Avatar, Chip, Searchbar } from 'react-native-paper';
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { SetStateAction } from 'react';
 import { AppTextStyle } from '../../commons/textStyle';
 import { AppStack } from '../../components/AppStack';
@@ -11,6 +11,7 @@ import { AppButton } from '../../components/AppButton';
 import Spacer from '../../components/Spacer';
 import { VideoCard } from '../../components/Card/VideoCard';
 import { FoodCard } from '../../components/Card/FoodCard';
+import { AxiosClient } from '../../services/axios-client';
 
 export function DashboardScreen() {
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -30,6 +31,15 @@ export function DashboardScreen() {
       </AppStack>
     );
   };
+
+  const fetchFoodCard = async () => {
+    const response = await AxiosClient.get('/recipes/complexSearch?query=chicken&number=10');
+    console.log(response);
+  };
+
+  useEffect(() => {
+    fetchFoodCard();
+  }, []);
 
   const onChangeSearch = (query: SetStateAction<string>) => setSearchQuery(query);
   return (
