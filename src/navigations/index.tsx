@@ -6,6 +6,8 @@ import WelcomeScreen from '../screens/dashboard/WelcomeScreen';
 import { navigationRef } from './rootNavigator';
 import BottomTabNavigator from './bottomTabNavigator';
 import { DetailFoodRecipe } from '../screens/dashboard/DetailFoodRecipe';
+import { IconButton } from 'react-native-paper';
+import { AppColors } from '../commons/colors';
 
 const RootStackNavigation = (): JSX.Element => {
   const RootStack = createNativeStackNavigator();
@@ -14,7 +16,14 @@ const RootStackNavigation = (): JSX.Element => {
       <RootStack.Navigator initialRouteName="Welcome">
         <RootStack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
         <RootStack.Screen name="BottomTabNavigator" component={BottomTabNavigator} options={{ headerShown: false }} />
-        <RootStack.Screen name="DetailFoodRecipe" component={DetailFoodRecipe} options={{ headerShown: false }} />
+        <RootStack.Screen
+          name="DetailFoodRecipe"
+          component={DetailFoodRecipe}
+          options={{
+            headerRight: () => <IconButton icon="dots-horizontal" iconColor={AppColors.Neutral_100} size={25} onPress={() => console.log('Pressed')} />,
+            headerTitle: '',
+          }}
+        />
         {/* <RootStack.Screen
           name="Dashboard"
           component={DashboardScreen}
