@@ -24,8 +24,12 @@ To set up this app in a new environment, follow these steps:
     cd recipe-app
     npm install
     ```
+3. **copy .env.example**
+   ```bash
+    cp .env.example
+   ```
 
-3. **Start the app:**
+4. **Start the app:**
 
     ```bash
     expo start
