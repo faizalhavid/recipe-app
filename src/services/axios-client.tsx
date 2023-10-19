@@ -10,7 +10,7 @@ export const AxiosClient = axios.create({
 
 AxiosClient.interceptors.request.use(
   async (config) => {
-    const apiKey = 'e0f02fbf157b47f3a5f9239c43016d48';
+    const apiKey = '89dfa750f9f04ca9943141fd1824438f';
 
     if (config.params) {
       config.params.apiKey = apiKey;
@@ -21,6 +21,6 @@ AxiosClient.interceptors.request.use(
     return config;
   },
   (error) => {
-    return Promise.reject(error);
+    return console.log(error);
   }
 );

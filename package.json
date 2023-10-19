@@ -33,5 +33,25 @@
     "react-native-dotenv": "^3.4.9",
     "typescript": "^5.2.2"
   },
-  "private": true
+  "private": false,
+  "description": "aplication for submission coding test mobile at sekawan media",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faizalhavid/recipe-app.git"
+  },
+  "keywords": [
+    "food",
+    "recipes",
+    "aplication",
+    "android",
+    "react",
+    "native",
+    "react"
+  ],
+  "author": "Moh.faizal Norhavid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/faizalhavid/recipe-app/issues"
+  },
+  "homepage": "https://github.com/faizalhavid/recipe-app#readme"
 }

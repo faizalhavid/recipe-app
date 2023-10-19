@@ -52,9 +52,13 @@ export function VideoCard({ color, barStyle, ...props }: AppCardProps) {
         <AppStack direction={'row'} alignItems="center" spacing={10}>
           <Avatar.Image
             size={35}
-            source={{
-              uri: props.authorImage || 'https://cdn-icons-png.flaticon.com/512/64/64572.png',
-            }}
+            source={
+              props.authorImage
+                ? {
+                    uri: props.authorImage,
+                  }
+                : require('../../../../assets/images/author.jpg')
+            }
             theme={{ colors: { primary: 'white' } }}
           />
           <Paragraph style={AppTextStyle.h5(AppColors.Neutral_40, 12)}>By {props.author}</Paragraph>
