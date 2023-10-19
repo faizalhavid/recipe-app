@@ -43,8 +43,8 @@ export function VideoCard({ color, barStyle, ...props }: AppCardProps) {
         </TouchableOpacity>
       </View>
       <Card.Content style={{ backgroundColor: AppColors.Neutral_0, width: props.width }}>
-        <AppStack direction={'row'} justifyContent="space-between" spacing={10} alignContent="center" alignItems="center" style={{ width: props.width * 0.94 }}>
-          <Title numberOfLines={1} ellipsizeMode="tail" style={[AppTextStyle.h4(AppColors.Neutral_100, 12), { width: props.width * 0.8 }]}>
+        <AppStack direction={'row'} justifyContent="space-between" spacing={10} alignContent="center" alignItems="center" style={{ width: (props.width ?? 0) * 0.94 }}>
+          <Title numberOfLines={1} ellipsizeMode="tail" style={[AppTextStyle.h4(AppColors.Neutral_100, 12), { width: (props.width ?? 0) * 0.8 }]}>
             {props.title}
           </Title>
           <IconButton icon="dots-horizontal" size={20} onPress={() => console.log('Pressed')} />

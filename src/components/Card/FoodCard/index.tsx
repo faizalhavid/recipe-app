@@ -1,5 +1,5 @@
 import { View, Text, Image } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { AppColors } from '../../../commons/colors';
 import { AppTextStyle } from '../../../commons/textStyle';
 import { AppStack } from '../../AppStack';
@@ -10,28 +10,32 @@ type FoodCardProps = {
   title?: string;
   time?: string;
   foodImage?: string;
+  onPress?: () => void;
+  key?: number;
 };
 
-export function FoodCard({ title, time, foodImage }: FoodCardProps) {
+export function FoodCard({ title, time, foodImage, onPress, key }: FoodCardProps) {
   const imageSource = foodImage ? { uri: foodImage } : require('../../../../assets/images/food-circle.png');
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.foodCircle}>
-        <Image source={imageSource} style={styles.foodImage} alt="Food Circle" resizeMode="cover" />
-      </View>
-      <View style={styles.foodContainer} alignItems={'center'}>
-        <Text style={[AppTextStyle.h4(AppColors.Neutral_100, 14), { textAlign: 'center', width: 100 }]} numberOfLines={2}>
-          {title}
-        </Text>
-        <AppStack direction={'row'} justifyContent="space-between" alignContent="center" alignItems="center" style={{ width: 130 }}>
-          <AppStack direction={'column'}>
-            <Text style={AppTextStyle.h5(AppColors.Neutral_60, 12)}>Time</Text>
-            <Text style={AppTextStyle.h3(AppColors.Neutral_100, 12)}>{time} min</Text>
+    <TouchableOpacity onPress={onPress} key={key}>
+      <View style={styles.wrapper}>
+        <View style={styles.foodCircle}>
+          <Image source={imageSource} style={styles.foodImage} alt="Food Circle" resizeMode="cover" />
+        </View>
+        <View style={styles.foodContainer} alignItems={'center'}>
+          <Text style={[AppTextStyle.h4(AppColors.Neutral_100, 14), { textAlign: 'center', width: 100 }]} numberOfLines={2}>
+            {title}
+          </Text>
+          <AppStack direction={'row'} justifyContent="space-between" alignContent="center" alignItems="center" style={{ width: 130 }}>
+            <AppStack direction={'column'}>
+              <Text style={AppTextStyle.h5(AppColors.Neutral_60, 12)}>Time</Text>
+              <Text style={AppTextStyle.h3(AppColors.Neutral_100, 12)}>{time} min</Text>
+            </AppStack>
+            <IconButton icon="bookmark-minus-outline" size={16} iconColor={AppColors.Neutral_100} mode="contained" onPress={() => console.log(title)} style={{ backgroundColor: AppColors.Neutral_0 }} />
           </AppStack>
-          <IconButton icon="bookmark-minus-outline" size={16} iconColor={AppColors.Neutral_100} mode="contained" onPress={() => console.log(title)} style={{ backgroundColor: AppColors.Neutral_0 }} />
-        </AppStack>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

@@ -23,6 +23,7 @@ const RootStackNavigation = () => {
           options={{
             headerRight: () => <IconButton icon="dots-horizontal" iconColor={AppColors.Neutral_100} size={25} onPress={() => console.log('Pressed')} />,
             headerTitle: '',
+            headerShadowVisible: false,
           }}
         />
         <RootStack.Screen
@@ -31,6 +32,7 @@ const RootStackNavigation = () => {
           options={{
             headerRight: () => <IconButton icon="dots-horizontal" iconColor={AppColors.Neutral_100} size={25} onPress={() => console.log('Pressed')} />,
             headerTitle: 'See all food recipe',
+            headerShadowVisible: false,
           }}
         />
         {/* <RootStack.Screen

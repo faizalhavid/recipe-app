@@ -12,7 +12,13 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { navigate } from '../../navigations/rootNavigator';
 
 const category = ['meat', 'pork', 'powder', 'vegetable', 'fruit', 'seafood'];
-
+type Food = {
+  id: number;
+  title: string;
+  image: string;
+  likes: string;
+  reviews: string;
+};
 type SeeAllFoodRecipeProps = {
   route: any;
 };
@@ -78,7 +84,7 @@ export function SeeAllFoodRecipe({ route }: SeeAllFoodRecipeProps) {
         </View>
       ) : (
         <>
-          {food.map((item, index) => (
+          {food.map((item: Food, index: number) => (
             <VideoCard
               key={index}
               image={item.image}

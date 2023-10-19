@@ -8,7 +8,7 @@ import { AppColors } from '../commons/colors';
 import { AppTextStyle } from '../commons/textStyle';
 import { BookmarkScreen } from '../screens/bookmark';
 import { AppStack } from '../components/AppStack';
-import { IconButton } from 'react-native-paper';
+import { Avatar, IconButton } from 'react-native-paper';
 import { Profile } from '../screens/profile';
 import { Notifications } from '../screens/notification';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -30,11 +30,15 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color, size }) => <AntDesign name="home" color={color} size={size} />,
 
           header: () => (
-            <View style={{ paddingLeft: 20, paddingVertical: 15, height: 95, backgroundColor: AppColors.Neutral_0 }}>
-              <Text style={AppTextStyle.h4(AppColors.Neutral_100, 20)}>Find best recipes</Text>
-              <Text style={AppTextStyle.h4(AppColors.Neutral_100, 20)}>for cooking</Text>
-            </View>
+            <AppStack direction="row" justifyContent="space-between" alignItems="center" style={{ width: '100%', paddingHorizontal: 20, paddingVertical: 12, height: 95, backgroundColor: AppColors.Neutral_0 }}>
+              <View>
+                <Text style={AppTextStyle.h4(AppColors.Neutral_100, 20)}>Find best recipes</Text>
+                <Text style={AppTextStyle.h4(AppColors.Neutral_100, 20)}>for cooking</Text>
+              </View>
+              <Avatar.Image size={45} source={require('../../assets/images/author.jpg')} theme={{ colors: { primary: 'black' } }} />
+            </AppStack>
           ),
+
           headerTitleAlign: 'left',
           headerShadowVisible: false,
           headerTitleStyle: AppTextStyle.h4(AppColors.Neutral_100, 20),

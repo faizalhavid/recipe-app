@@ -13,6 +13,20 @@ import { ingredientsIcons } from '../../constant/ingredientIcons';
 import { createShimmerPlaceHolder } from 'expo-shimmer-placeholder';
 import { LinearGradient } from 'expo-linear-gradient';
 
+type Ingredient = {
+  name: string;
+  amount: {
+    metric: {
+      value: number;
+    };
+  };
+};
+
+type Instruction = {
+  step: string;
+  ingredients: Ingredient[];
+};
+
 type DetailFoodRecipeProps = {
   route: any;
 };
@@ -99,7 +113,7 @@ export function DetailFoodRecipe({ route }: DetailFoodRecipeProps) {
       <List.Section>
         {loading
           ? [...Array(8)].map((_, index) => <ShimmerPlaceHolder key={index} style={{ width: '100%', height: 60, borderRadius: 10, marginVertical: 5 }} />)
-          : ingredients.map((item, index) => (
+          : ingredients.map((item: Ingredient, index: number) => (
               <List.Item
                 style={{ backgroundColor: AppColors.Neutral_10, marginVertical: 5, borderRadius: 10, padding: 8 }}
                 key={index}
@@ -127,7 +141,7 @@ export function DetailFoodRecipe({ route }: DetailFoodRecipeProps) {
       <List.Section>
         {loading
           ? [...Array(8)].map((_, index) => <ShimmerPlaceHolder key={index} style={{ width: '100%', height: 60, borderRadius: 10, marginVertical: 5 }} />)
-          : instruction.map((item, index) => (
+          : instruction.map((item: Instruction, index: number) => (
               <List.Item
                 key={index}
                 title={() => (
