@@ -10,8 +10,14 @@ export const AxiosClient = axios.create({
 
 AxiosClient.interceptors.request.use(
   async (config) => {
-    const apiKey = API_KEY;
-    config.url = `${config.url}&apiKey=${apiKey}`;
+    const apiKey = 'e0f02fbf157b47f3a5f9239c43016d48';
+
+    if (config.params) {
+      config.params.apiKey = apiKey;
+    } else {
+      config.params = { apiKey };
+    }
+
     return config;
   },
   (error) => {

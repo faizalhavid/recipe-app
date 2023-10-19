@@ -18,13 +18,14 @@ type AppCardProps = {
   author?: string;
   authorImage?: string;
   width?: number;
+  key?: number;
   style?: any;
   onPress?: () => void;
 };
 
 export function VideoCard({ color, barStyle, ...props }: AppCardProps) {
   return (
-    <Card style={[styles.card, props.style, { width: props.width }]} theme={{ colors: { primary: 'white' } }}>
+    <Card key={props.key} style={[styles.card, props.style, { width: props.width }]} theme={{ colors: { primary: 'white' } }}>
       <View style={[styles.container, { width: props.width }]}>
         <TouchableOpacity onPress={props.onPress} style={[styles.card, props.style]}>
           <Image source={props.image ? { uri: props.image } : require('../../../../assets/images/unknown-image.png')} style={[styles.background, { width: props.width }]} resizeMode="cover" />
@@ -42,8 +43,10 @@ export function VideoCard({ color, barStyle, ...props }: AppCardProps) {
         </TouchableOpacity>
       </View>
       <Card.Content style={{ backgroundColor: AppColors.Neutral_0, width: props.width }}>
-        <AppStack direction={'row'} justifyContent="space-between" alignContent="center" alignItems="center">
-          <Title style={AppTextStyle.h4(AppColors.Neutral_100, 12)}>{props.title}</Title>
+        <AppStack direction={'row'} justifyContent="space-between" spacing={10} alignContent="center" alignItems="center" style={{ width: props.width * 0.94 }}>
+          <Title numberOfLines={1} ellipsizeMode="tail" style={[AppTextStyle.h4(AppColors.Neutral_100, 12), { width: props.width * 0.8 }]}>
+            {props.title}
+          </Title>
           <IconButton icon="dots-horizontal" size={20} onPress={() => console.log('Pressed')} />
         </AppStack>
         <AppStack direction={'row'} alignItems="center" spacing={10}>

@@ -17,11 +17,13 @@ export function FoodCard({ title, time, foodImage }: FoodCardProps) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.foodCircle}>
-        <Image source={imageSource} style={styles.foodImage} alt="Food Circle" />
+        <Image source={imageSource} style={styles.foodImage} alt="Food Circle" resizeMode="cover" />
       </View>
-      <View style={styles.foodContainer}>
-        <Text style={[AppTextStyle.h4(AppColors.Neutral_100, 14), { textAlign: 'center' }]}>{title}</Text>
-        <AppStack direction={'row'} justifyContent="space-between" alignContent="center" alignItems="center">
+      <View style={styles.foodContainer} alignItems={'center'}>
+        <Text style={[AppTextStyle.h4(AppColors.Neutral_100, 14), { textAlign: 'center', width: 100 }]} numberOfLines={2}>
+          {title}
+        </Text>
+        <AppStack direction={'row'} justifyContent="space-between" alignContent="center" alignItems="center" style={{ width: 130 }}>
           <AppStack direction={'column'}>
             <Text style={AppTextStyle.h5(AppColors.Neutral_60, 12)}>Time</Text>
             <Text style={AppTextStyle.h3(AppColors.Neutral_100, 12)}>{time} min</Text>
@@ -56,6 +58,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   foodContainer: {
     height: 200,
@@ -75,5 +78,5 @@ const styles = StyleSheet.create({
     padding: 15,
   },
 
-  foodImage: { height: 100, width: 100, borderRadius: 50 },
+  foodImage: { height: 130, width: 130, borderRadius: 50 },
 });

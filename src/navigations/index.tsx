@@ -8,8 +8,9 @@ import BottomTabNavigator from './bottomTabNavigator';
 import { DetailFoodRecipe } from '../screens/dashboard/DetailFoodRecipe';
 import { IconButton } from 'react-native-paper';
 import { AppColors } from '../commons/colors';
+import { SeeAllFoodRecipe } from '../screens/dashboard/SeeAllFoodRecipe';
 
-const RootStackNavigation = (): JSX.Element => {
+const RootStackNavigation = () => {
   const RootStack = createNativeStackNavigator();
   return (
     <NavigationContainer ref={navigationRef}>
@@ -22,6 +23,14 @@ const RootStackNavigation = (): JSX.Element => {
           options={{
             headerRight: () => <IconButton icon="dots-horizontal" iconColor={AppColors.Neutral_100} size={25} onPress={() => console.log('Pressed')} />,
             headerTitle: '',
+          }}
+        />
+        <RootStack.Screen
+          name="SeeAllFoodRecipe"
+          component={SeeAllFoodRecipe}
+          options={{
+            headerRight: () => <IconButton icon="dots-horizontal" iconColor={AppColors.Neutral_100} size={25} onPress={() => console.log('Pressed')} />,
+            headerTitle: 'See all food recipe',
           }}
         />
         {/* <RootStack.Screen

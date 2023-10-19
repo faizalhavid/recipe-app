@@ -16,16 +16,19 @@ import { createShimmerPlaceHolder } from 'expo-shimmer-placeholder';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Toast } from '../../components/Toast';
 
+const popularCategory = ['Breakfast', 'Salad', 'Appetizer', 'Dinner', 'Cake', 'Soup'];
+const author = {
+  name: 'Moh. Faizal Norhavid',
+  email: 'nurhavid123@gmail.com',
+  address: 'Surabaya, Indonesia',
+  phone: '081234567890',
+};
 export function DashboardScreen() {
   const [searchQuery, setSearchQuery] = React.useState('');
-  const [chickenFood, setChickenFood] = React.useState([]);
+  const [clickedIndex, setClickedIndex] = React.useState(-1);
+  const [trendingFood, setTrendingFood] = React.useState([]);
+  const [categoryFood, setCategoryFood] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-  const author = {
-    name: 'Moh. Faizal Norhavid',
-    email: 'nurhavid123@gmail.com',
-    address: 'Surabaya, Indonesia',
-    phone: '081234567890',
-  };
 
   const Creator = (imageUri?: string, name?: string) => {
     return (
@@ -44,26 +47,51 @@ export function DashboardScreen() {
     );
   };
   const ShimmerPlaceHolder = createShimmerPlaceHolder(LinearGradient);
+  const fetchtrendingFood = async () => {
+    try {
+      setLoading(true);
+      const response = await AxiosClient.get('complexSearch?query=chicken&number=6');
+      const data = response.data.results.map((item: object) => ({
+        ...item,
+        likes: (Math.random() * 5).toFixed(1),
+        reviews: (Math.random() * 100).toFixed(0),
+      }));
+      setTrendingFood(data);
+      console.log(data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      Toast('Error fetching data , try again later !');
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const fetchFoodCategory = async (category: string) => {
+    try {
+      setLoading(true);
+      const response = await AxiosClient.get(`complexSearch?query=${category}&number=6`);
+      const data = response.data.results.map((item: object) => ({
+        ...item,
+        time: (Math.random() * 60).toFixed(0),
+      }));
+      setCategoryFood(data);
+      console.log(data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      Toast('Error fetching data , try again later !');
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await AxiosClient.get('complexSearch?query=chicken&number=6');
-        const data = response.data.results.map((item: object) => ({
-          ...item,
-          likes: (Math.random() * 5).toFixed(1),
-          reviews: (Math.random() * 100).toFixed(0),
-        }));
-        setChickenFood(data);
-        setLoading(false);
-      } catch (error) {
-        Toast('Error fetching data , try again later !');
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
-  }, [setChickenFood]);
+    fetchtrendingFood();
+  }, []);
+
+  useEffect(() => {
+    setClickedIndex(0);
+    fetchFoodCategory(popularCategory[0]);
+  }, []);
 
   const onChangeSearch = (query: SetStateAction<string>) => setSearchQuery(query);
   return (
@@ -72,7 +100,7 @@ export function DashboardScreen() {
       <Spacer top={20} />
       <AppStack direction="row" justifyContent="space-between">
         <Text style={AppTextStyle.h4(AppColors.Neutral_100, 18)}>Chicken Trending 🔥</Text>
-        <AppButton spacing={5} title="See all" textStyle={{ color: AppColors.Primary_30, fontFamily: 'Popins-SemiBold', fontSize: 14 }} onPress={() => navigate('Dashboard')} backgroundcolor={'transparent'} height={5} width={20} suffix={<Ionicons name="ios-arrow-forward" size={23} color={AppColors.Primary_30} style={{ fontWeight: '400' }} />} />
+        <AppButton spacing={5} title="See all" textStyle={{ color: AppColors.Primary_30, fontFamily: 'Popins-SemiBold', fontSize: 14 }} onPress={() => navigate('SeeAllFoodRecipe', { author: author })} backgroundcolor={'transparent'} height={5} width={20} suffix={<Ionicons name="ios-arrow-forward" size={23} color={AppColors.Primary_30} style={{ fontWeight: '400' }} />} />
       </AppStack>
       <Spacer top={20} />
       <View style={{ height: 280 }}>
@@ -88,7 +116,7 @@ export function DashboardScreen() {
                   </AppStack>
                 </AppStack>
               ))
-            : chickenFood.map((item, index) => (
+            : trendingFood.map((item, index) => (
                 <VideoCard
                   key={index}
                   author={author.name}
@@ -112,34 +140,51 @@ export function DashboardScreen() {
       <Spacer top={5} />
       <View style={{ height: 60 }}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <Chip onPress={() => console.log('Pressed')} style={styles.chip} textStyle={{ color: AppColors.Primary_50 }}>
-            Breakfast
-          </Chip>
-          <Chip onPress={() => console.log('Pressed')} style={{ height: 35, backgroundColor: AppColors.Primary_50, marginRight: 5 }} textStyle={{ color: AppColors.Neutral_0 }}>
-            Salad
-          </Chip>
-          <Chip onPress={() => console.log('Pressed')} style={styles.chip} textStyle={{ color: AppColors.Primary_50 }}>
-            Appetizer
-          </Chip>
-          <Chip onPress={() => console.log('Pressed')} style={styles.chip} textStyle={{ color: AppColors.Primary_50 }}>
-            Dinner
-          </Chip>
-          <Chip onPress={() => console.log('Pressed')} style={styles.chip} textStyle={{ color: AppColors.Primary_50 }}>
-            Cake
-          </Chip>
-          <Chip onPress={() => console.log('Pressed')} style={styles.chip} textStyle={{ color: AppColors.Primary_50 }}>
-            Soup
-          </Chip>
+          {popularCategory.map((item, index) => (
+            <Chip
+              icon={() => <Ionicons name="heart" size={12} color={AppColors.Neutral_0} />}
+              key={index}
+              style={[styles.chip, { backgroundColor: clickedIndex === index ? AppColors.Primary_60 : AppColors.Neutral_20 }]}
+              onPress={() => {
+                setClickedIndex(index);
+                fetchFoodCategory(item);
+              }}
+              selected={clickedIndex === index}
+              selectedColor={AppColors.Primary_60}
+              textStyle={AppTextStyle.h5(clickedIndex === index ? AppColors.Neutral_0 : AppColors.Neutral_60, 12)}
+            >
+              {item}
+            </Chip>
+          ))}
         </ScrollView>
       </View>
 
       <View style={{ height: 260 }}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <FoodCard title="Pepper sweetcorn ramen" time="20" />
-          <FoodCard title="Pepper sweetcorn ramen" time="20" />
-          <FoodCard title="Pepper sweetcorn ramen" time="20" />
-          <FoodCard title="Pepper sweetcorn ramen" time="20" />
-          <FoodCard title="Pepper sweetcorn ramen" time="20" />
+          {loading
+            ? [...Array(3)].map((_, index) => (
+                <AppStack key={index} direction="column" spacing={12} style={{ marginRight: 15 }}>
+                  <ShimmerPlaceHolder style={{ width: 260, height: 180, borderRadius: 15 }} />
+                  <ShimmerPlaceHolder style={{ width: 80, height: 10, borderRadius: 25 }} />
+                  <AppStack direction="row" spacing={15} alignItems="center" alignContent="center">
+                    <ShimmerPlaceHolder style={{ width: 40, height: 40, borderRadius: 50 }} />
+                    <ShimmerPlaceHolder style={{ width: 80, height: 10, borderRadius: 15 }} />
+                  </AppStack>
+                </AppStack>
+              ))
+            : categoryFood.map((item, index) => (
+                <FoodCard
+                  key={index}
+                  title={item.title}
+                  foodImage={item.image}
+                  time={item.time}
+                  onPress={() =>
+                    navigate('DetailFoodRecipe', {
+                      food: item,
+                    })
+                  }
+                />
+              ))}
         </ScrollView>
       </View>
       <AppStack direction="row" justifyContent="space-between">
@@ -174,5 +219,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 15,
   },
-  chip: { height: 35, backgroundColor: AppColors.Neutral_0, marginRight: 5 },
+  chip: { height: 35, marginRight: 8 },
 });
