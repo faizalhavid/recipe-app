@@ -11,13 +11,12 @@ type FoodCardProps = {
   time?: string;
   foodImage?: string;
   onPress?: () => void;
-  key?: number;
 };
 
-export function FoodCard({ title, time, foodImage, onPress, key }: FoodCardProps) {
+export function FoodCard({ title, time, foodImage, onPress }: FoodCardProps) {
   const imageSource = foodImage ? { uri: foodImage } : require('../../../../assets/images/food-circle.png');
   return (
-    <TouchableOpacity onPress={onPress} key={key}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.wrapper}>
         <View style={styles.foodCircle}>
           <Image source={imageSource} style={styles.foodImage} alt="Food Circle" resizeMode="cover" />
