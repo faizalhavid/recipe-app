@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_KEY, BASE_URL } from '@env';
 
 export const AxiosClient = axios.create({
-  baseURL: BASE_URL,
+  baseURL: 'https://api.spoonacular.com/recipes/',
   headers: {
     'Content-Type': 'application/json',
   },
