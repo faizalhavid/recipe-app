@@ -1,6 +1,6 @@
 # Recipe App
 
-![Recipe App Demo](https://github.com/faizalhavid/recipe-app/blob/master/assets/images/icon.png)
+![Recipe App Demo](https://github.com/faizalhavid/recipe-app/blob/master/assets/images/icon.png){width=200 height=100}
 
 This is a React Native Expo app that allows users to browse and save recipes. It is built using the following technologies:
 - React Native
@@ -43,31 +43,31 @@ The app consists of the following screens:
 
 ### Home Screen
 
-![Welcome Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/welcome.jpg)
-![Home Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/home.jpg)
+![Welcome Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/welcome.jpg){width=720 height=1280}
+![Home Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/home.jpg){width=720 height=1280}
 - This screen displays a list of recipes.
 - Users can scroll through the list or search for recipes by name.
 
 ### Recipe Detail Screen
 
-![Recipe Detail Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/detail.jpg)
-![Recipe Detail Screen2](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/detail2.jpg)
+![Recipe Detail Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/detail.jpg){width=720 height=1280}
+![Recipe Detail Screen2](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/detail2.jpg){width=720 height=1280}
 
 - This screen displays the details of a recipe.
 - Users can view the ingredients and instructions.
 
 ### Bookmark Screen
 
-![Bookmark Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/bookmark.jpg)
+![Bookmark Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/bookmark.jpg){width=720 height=1280}
 
 - This screen displays a list of the user's important recipes.
 - Users can add and remove recipes from their bookmark
 
 ### Notification
-![Notification Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/notification.jpg)
+![Notification Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/notification.jpg){width=720 height=1280}
 
 ### Profile
-![Profile Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/profile.jpg)
+![Profile Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/profile.jpg){width=720 height=1280}
 
 ## Contributing
 
