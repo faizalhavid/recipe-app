@@ -78,4 +78,4 @@ Contributions are welcome! To contribute, follow these steps:
 
 ## Contact
 
-If you have any questions or feedback, please contact [your-email].
+If you have any questions or feedback, please contact nurhavid123@gmail.com.
