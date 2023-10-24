@@ -1,6 +1,6 @@
 # Recipe App
 
-![Recipe App Demo](app-screenshot.png)
+![Recipe App Demo](https://github.com/faizalhavid/recipe-app/blob/master/assets/images/icon.png)
 
 This is a React Native Expo app that allows users to browse and save recipes. It is built using the following technologies:
 - React Native
@@ -29,7 +29,9 @@ To set up this app in a new environment, follow these steps:
     cp .env.example
    ```
 
-4. **Start the app:**
+4. **register api food recipie and get apikey**
+
+5. **Start the app:**
 
     ```bash
     expo start
@@ -41,24 +43,31 @@ The app consists of the following screens:
 
 ### Home Screen
 
-![Home Screen](screenshots/home-screen.png)
-
+![Welcome Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/welcome.jpg)
+![Home Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/home.jpg)
 - This screen displays a list of recipes.
 - Users can scroll through the list or search for recipes by name.
 
 ### Recipe Detail Screen
 
-![Recipe Detail Screen](screenshots/recipe-detail-screen.png)
+![Recipe Detail Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/detail.jpg)
+![Recipe Detail Screen2](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/detail2.jpg)
 
 - This screen displays the details of a recipe.
-- Users can view the ingredients, instructions, and nutritional information.
+- Users can view the ingredients and instructions.
 
 ### Bookmark Screen
 
-![Favorites Screen](screenshots/favorites-screen.png)
+![Bookmark Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/bookmark.jpg)
 
-- This screen displays a list of the user's favorite recipes.
-- Users can add and remove recipes from their favorites.
+- This screen displays a list of the user's important recipes.
+- Users can add and remove recipes from their bookmark
+
+### Notification
+![Notification Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/notification.jpg)
+
+### Profile
+![Profile Screen](https://github.com/faizalhavid/recipe-app/blob/master/screenshoot/profile.jpg)
 
 ## Contributing
 
