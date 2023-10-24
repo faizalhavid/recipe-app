@@ -15,7 +15,7 @@ To set up this app in a new environment, follow these steps:
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/[your-username]/recipe-app.git
+    git clone https://github.com/faizalhavid/recipe-app.git
     ```
 
 2. **Install the dependencies:**
@@ -53,7 +53,7 @@ The app consists of the following screens:
 - This screen displays the details of a recipe.
 - Users can view the ingredients, instructions, and nutritional information.
 
-### Favorites Screen
+### Bookmark Screen
 
 ![Favorites Screen](screenshots/favorites-screen.png)
 
@@ -78,4 +78,4 @@ Contributions are welcome! To contribute, follow these steps:
 
 ## Contact
 
-If you have any questions or feedback, please contact [your-email].
+If you have any questions or feedback, please contact nurhavid123@gmail.com.
