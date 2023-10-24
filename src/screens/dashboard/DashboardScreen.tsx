@@ -91,6 +91,8 @@ export function DashboardScreen() {
       const data = response.data.results.map((item: object) => ({
         ...item,
         time: (Math.random() * 60).toFixed(0),
+        likes: (Math.random() * 5).toFixed(1),
+        reviews: (Math.random() * 100).toFixed(0),
       }));
       setCategoryFood(data);
       console.log(data);
@@ -205,6 +207,7 @@ export function DashboardScreen() {
                 onPress={() =>
                   navigate('DetailFoodRecipe', {
                     food: item,
+                    author: author,
                   })
                 }
               />

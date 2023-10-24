@@ -33,6 +33,7 @@ type DetailFoodRecipeProps = {
 
 export function DetailFoodRecipe({ route }: DetailFoodRecipeProps) {
   const { food, author } = route.params;
+  console.log(food);
   const [ingredients, setingredients] = React.useState([]);
   const [instruction, setinstruction] = React.useState([]);
   const ShimmerPlaceHolder = createShimmerPlaceHolder(LinearGradient);
@@ -153,7 +154,7 @@ export function DetailFoodRecipe({ route }: DetailFoodRecipeProps) {
                   <>
                     {item.ingredients.length > 0 && <Text style={[AppTextStyle.h4(AppColors.Neutral_100, 14), { paddingVertical: 5 }]}>Ingredients</Text>}
                     <AppStack direction="row" alignItems="center" justifyContent="flex-start" spacing={5} style={{ width: 308, flexWrap: 'wrap' }}>
-                      {item.ingredients.map((ingredient: object, ingredientIndex: number) => (
+                      {item.ingredients.map((ingredient: Ingredient, ingredientIndex: number) => (
                         <AppStack direction="row" key={ingredientIndex} style={{ paddingVertical: 4, paddingHorizontal: 8, backgroundColor: AppColors.Neutral_20, borderRadius: 10, marginBottom: 5 }} spacing={5}>
                           <Text> {ingredientsIcons(ingredient.name)}</Text>
                           <Text style={AppTextStyle.p(AppColors.Neutral_60, 12)}>{ingredient.name}</Text>

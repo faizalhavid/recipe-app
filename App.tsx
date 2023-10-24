@@ -12,5 +12,10 @@ export default function App() {
     await useFonts();
   };
 
-  return <NativeBaseProvider>{IsReady ? <RootStackNavigation /> : <AppLoading color={AppColors.Primary_30} startAsync={LoadFonts} onFinish={() => SetIsReady(true)} onError={() => {}} />}</NativeBaseProvider>;
+  return <NativeBaseProvider>
+    {IsReady ? 
+      <RootStackNavigation /> 
+      : <AppLoading color={AppColors.Primary_30} startAsync={LoadFonts} onFinish={() => SetIsReady(true)} onError={() => {console.log('error load font')}} />
+      }
+    </NativeBaseProvider>;
 }
